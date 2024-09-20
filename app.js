@@ -7,7 +7,6 @@ const Senha = require('./models/Senha');
 
 app.use(express.static(diretorio.join(__dirname, 'public')));
 
-
 app.get('/gerarSenha', async (req, res) => {
   try {
     const lastSenha = await Senha.findOne().sort({ numero: -1 });
@@ -23,7 +22,6 @@ app.get('/gerarSenha', async (req, res) => {
     res.status(500).send('Erro ao gerar nova senha.');
   }
 });
-
 
 app.get('/chamarSenha', async (req, res) => {
   try {
@@ -52,7 +50,6 @@ app.get('/fila', async (req, res) => {
     res.status(500).send('Erro ao obter a fila de senhas.');
   }
 });
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
