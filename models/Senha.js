@@ -7,5 +7,4 @@ const senhaSchema = new mongoose.Schema({
 });
 
 const Senha = mongoose.model('Senha', senhaSchema);
-
 module.exports = Senha;
