@@ -1,14 +1,23 @@
-const mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-const uri = 'mongodb://localhost:27017/sistema_senhas'; 
+const server = '127.0.0.1:27017'; 
+const database = 'sistema_senhas'; 
 
-mongoose.connect(uri);
+class Database {
+  constructor() {
+    this._connect();
+  }
 
-const db = mongoose.connection;
+  _connect() {
+    mongoose
+      .connect(`mongodb://${server}/${database}`)
+      .then(() => {
+        console.log('Mongo conectado');
+      })
+      .catch((err) => {
+        console.error('Erro ao conectar');
+      });
+  }
+}
 
-db.on('error', console.error.bind(console, 'Erro na conexão ao MongoDB:'));
-db.once('open', () => {
-  console.log('Conectado ao MongoDB com sucesso!');
-});
-
-module.exports = mongoose;
+module.exports = new Database();
